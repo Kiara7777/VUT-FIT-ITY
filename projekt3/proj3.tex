@@ -1,0 +1,230 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[left=2cm, text={17cm, 24cm}, top=3cm]{geometry}
+\usepackage[latin2]{inputenc}
+\usepackage[czech]{babel}
+%\usepackage[IL2]{fontenc}
+\usepackage{times}
+
+\usepackage{multirow}
+\usepackage[czech, ruled, longend, noline]{algorithm2e} 
+\usepackage{graphics}
+\usepackage{picture}
+\usepackage{lscape}
+
+\providecommand{\uv}[1]{\quotedblbase#1\textquotedblleft}
+
+\begin{document}
+%\overfullrule=5pt
+
+\begin{titlepage}
+\begin{center}
+{\scshape
+\begin{Huge}
+Vysoké uèení technické v~Brnì\\
+\end{Huge}
+\begin{huge}
+Fakulta informaèních technologií\\
+\end{huge}
+}
+\vspace{\stretch{0.382}}
+\begin{LARGE}
+Typografie a publikování\,--\,3. projekt\\
+\end{LARGE}
+\begin{Huge}
+Tabulky a obrázky\\
+\end{Huge}
+\vspace{\stretch{0.618}}
+\end{center}
+
+{\Large \today \hfill Sára ©kutová}
+\end{titlepage}
+
+\section{Úvodní strana}
+Název práce umístìte do zlatého øezu a nezapomeòte uvést dne¹ní datum a va¹e jméno a pøíjmení.
+
+\section{Tabulky}
+Pro sázení tabulek mù¾eme pou¾ít buï prostøedí \texttt{tabbing} nebo prostøedí \texttt{tabular}.
+
+\subsection{Prostøedí \texttt{tabbing}}
+Pøi pou¾ití \texttt{tabbing} vypadá tabulka následovnì:
+
+\begin{tabbing}
+Vodní melouny\quad \= 25,90\quad \= Mno¾ství \kill
+\textbf{Ovoce}	\> \textbf{Cena} \> \textbf{Mno¾ství} \\
+Jablka 			\> 25,90 		 \> 3\,kg \\
+Hru¹ky			\> 27,40 		 \> 2,5\,kg \\
+Vodní melouny	\> 35,-- 		 \> 1 kus \\
+\end{tabbing}
+\noindent Toto prostøedí se dá také pou¾ít pro sázení algoritmù, ov¹em vhodnìj¹í je pou¾ít prostøedí \texttt{algorithm} nebo \texttt{algorithm2e} (viz sekce \ref{Algoritmy}).
+
+\subsection{Prostøedí \texttt{tabular}}
+Dal¹í mo¾ností, jak vytvoøit tabulku, je pou¾ít prostøedí \texttt{tabular}. Tabulky pak budou vypadat takto\footnote{Kdyby byl problem s~\texttt{cline}, zkuste se podívat tøeba sem: http://www.abclinuxu.cz/tex/poradna/show/325037.}:
+
+\begin{table}[ht] %\catcode bla bla pro cline
+\catcode`\-=12
+\begin{center}
+\begin{tabular}{|l|r|r|}\hline 
+ & \multicolumn{2}{c|}{\bfseries Cena} \\ \cline{2-3}
+\bfseries Mìna & \bfseries nákup & \bfseries prodej \\ \hline
+EUR & 27,34 & 27,42 \\  
+GBP & 33,09 & 33,21 \\  
+USD & 19,87 & 19,95 \\ \hline 
+\end{tabular}
+\caption{Tabulka kurzù k~dne¹nímu dni}
+\label{tabKurzy}
+\end{center}
+\end{table}
+
+\begin{table}[ht]
+\catcode`\-=12
+\begin{center}
+%mezi tabulkami nesmi byt mezera jinak se to da pod sebe
+\begin{tabular}{|c|c|} \hline 
+$A$ & $\neg A$ \\ \hline 
+\bfseries P   & N \\ \hline 
+\bfseries O   & O \\ \hline 
+\bfseries X   & X \\ \hline 
+\bfseries N   & P \\ \hline 
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|c|} %1
+\hline 
+\multicolumn{2}{|c|}{\multirow{2}{*}{$A \wedge B$}} & \multicolumn{4}{c|}{$B$} \\ \cline{3-6} 
+\multicolumn{2}{|c|}{} & \bfseries P & \bfseries O & \bfseries X & \bfseries N \\ \hline 
+\multirow{4}{*}{$A$} & \bfseries P & P & O & X & N \\ \cline{2-6} 
+& \bfseries O & O & O & N & N \\ \cline{2-6} 
+& \bfseries X & X & N & X & N \\ \cline{2-6} 
+& \bfseries N & N & N & N & N \\ \hline 
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|c|} %2
+\hline 
+\multicolumn{2}{|c|}{\multirow{2}{*}{$A \vee B$}} & \multicolumn{4}{c|}{$B$} \\ \cline{3-6} 
+\multicolumn{2}{|c|}{} & \bfseries P & \bfseries O & \bfseries X & \bfseries N \\ \hline 
+\multirow{4}{*}{$A$} & \bfseries P & P & P & P & P \\ \cline{2-6} 
+& \bfseries O & P & O & P & O \\ \cline{2-6} 
+& \bfseries X & P & P & X & X \\ \cline{2-6} 
+& \bfseries N & P & O & X & N \\ \hline 
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|c|} %3
+\hline 
+\multicolumn{2}{|c|}{\multirow{2}{*}{$A \rightarrow B$}} & \multicolumn{4}{c|}{$B$} \\ \cline{3-6} 
+\multicolumn{2}{|c|}{} & \bfseries P & \bfseries O & \bfseries X & \bfseries N \\ \hline 
+\multirow{4}{*}{$A$} & \bfseries P & P & O & X & N \\ \cline{2-6} 
+& \bfseries O & P & O & P & O \\ \cline{2-6} 
+& \bfseries X & P & P & X & X \\ \cline{2-6} 
+& \bfseries N & P & P & P & P \\ \hline 
+\end{tabular}
+\caption{Proto¾e Kleeneho trojhodnotová logika u¾ je
+\uv{zastaralá}, uvádíme si zde pøíklad ètyøhodnotové
+logiky}
+\label{tabCtyrLogika}
+\end{center}
+\end{table}
+
+\section{\label{Algoritmy}Algoritmy}
+Pokud budeme chtít vysázet algoritmus, mù¾eme pou¾ít prostøedí \texttt{algorithm}\footnote{Pro nápovìdu, jak zacházet s~prostøedím \texttt{algorithm}, mù¾eme zkusit tuhle stránku:\\
+http://ftp.cstug.cz/pub/tex/CTAN/macros/latex/contrib/algorithms/algorithms.pdf.} nebo \texttt{algorithm2e}\footnote{Pro \texttt{algorithm2e} zase tuhle: http://ftp.cstug.cz/pub/tex/CTAN/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf.}.\linebreak %tvoril se hbox, neslo se ho zbavit
+Pøíklad pou¾ití prostøedí \texttt{algorithm2e} viz Algoritmus \ref{Algo1}.
+
+
+\begin{algorithm}
+\SetNlSkip{-1.3em} %posune cislovani
+\SetNlSty{}{}{: }
+\LinesNumbered  
+ 
+\KwIn{ $(X_{t-1}, u_t, z_t)$}
+\KwOut{ $X_t$}
+\BlankLine
+\Indp \Indp	%posune text za cislem, kdyz se to neudela, tak se to slije
+$\overline{X_t} = X_t = 0$\\
+\For{$k=1$ \textup{to} $M$}{
+	$x_t^{[k]} = $ \emph{sample\_motion\_model}$(u_t,x_{t-1}^{[k]})$\\
+	$\omega_t^{[k]} = $ \emph{measurement\_model}$(z_t,x_t^{[k]},m_{t-1})$\\
+	$m_t^{[k]} = updated\_occupancy\_grid(z_t,x_t^{[k]},m_{t-1}^{[k]})$\\
+	$\overline{X_t} = \overline{X_t} +  \langle x_x^{[m]}, \omega_t^{[m]} \rangle$
+}
+\For{$k=1$ \textup{to} $M$}{
+	draw $i$ with probability $\approx \omega_t^{[i]}$\\
+    add $\langle x_t^{[k]},m_t^{[k]} \rangle$ to $X_t$
+}
+\KwRet{$X_t$} 
+\caption{\scshape FastSLAM\label{Algo1}}
+\end{algorithm}
+
+\section{Obrázky}
+Do na¹ich èlánkù mù¾eme samozøejmì vkládat obrázky. Pokud je obrázkem fotografie, mù¾eme klidnì pou¾ít
+bitmapový soubor. Pokud by to ale mìlo být nìjaké schéma nebo nìco podobného, je dobrým zvykem takovýto
+obrázek vytvoøit vektorovì.
+
+\begin{figure}[ht]
+\begin{center}
+\scalebox{0.4}{\includegraphics{etiopan.eps}
+\reflectbox{\includegraphics{etiopan.eps}} }
+\caption{Malý Etiopánek a jeho bratøíèek}
+\label{Etiopan}
+\end{center}
+\end{figure}
+
+Rozdíl mezi vektorovým\,\ldots
+\begin{figure}[h]
+\begin{center}
+\scalebox{0.4}{\includegraphics{oniisan.eps}}
+\caption{Vektorový obrázek}
+\label{OniisanVektor}
+\end{center}
+\end{figure}
+
+\noindent\ldots\,a bitmapovým obrázkem
+\begin{figure}[h]
+\begin{center}
+\scalebox{0.6}{\includegraphics{oniisan2.eps}}
+\caption{Bitmapový obrázek}
+\label{OniisanBitmap}
+\end{center}
+\end{figure}
+
+\noindent se projeví napøíklad pøi zvìt¹ení.
+
+Odkazy (nejen ty) na obrázky \ref{Etiopan}, \ref{OniisanVektor} a \ref{OniisanBitmap}, na  
+tabulky \ref{tabKurzy} a \ref{tabCtyrLogika} a také na algoritmus \ref{Algo1} jsou udìlány pomocí 
+køí¾ových odkazù. Pak je ov¹em potøeba zdrojový soubor pøelo¾it dvakrát.
+
+Vektorové obrázky lze vytvoøit i pøímo v~\LaTeX u, napøíklad pomocí prostøedí 
+\texttt{picture}.
+
+\newpage
+\landscape
+\begin{figure}[ht]
+\begin{center}
+\begin{picture}(550,250) %magie od oka, naprosto random
+	\linethickness{1pt}
+	\put(0,0){\framebox(550, 250){}} %ramecek celkovy
+	\put(15, 40){\linethickness{2 mm}\line(1,0){520}} %tlusta cara dole
+	\put(80, 40){\line(0,1){90}} %1. vertikalni
+	\put(80, 130){\line(1,0){100}}
+	
+	\put(110, 40){\line(0,1){35}} %2.vertikalni
+	\put(110, 75){\line(1,0){90}}
+	\put(200, 75){\line(3,-1){97}}
+	
+	\put(210, 72){\line(0,1){18}}
+	\put(210, 90){\line(1,0){280}}
+	\put(490, 90){\line(0,-1){28}}
+	
+	\put(240, 62){\line(1,0){255}}
+	\put(495, 62){\line(0,-1){22}}
+	
+	\put(180, 115){\framebox(150, 30){}} %stsredni ramecek
+	
+	\put(331, 115){\framebox(150, 5){}} %maly ramecek
+	
+	\put(145, 95){\framebox(350, 19){}} %dlouhy ramecek
+	
+	\put(144, 95){\line(1, -1){20}} %2. nakrivo
+	
+	\put(470, 200){\circle{40}}
+
+\end{picture}
+\caption{Vektorový obrázek v~prostøedí \texttt{picture}}
+\end{center}
+\end{figure}
+\end{document}
